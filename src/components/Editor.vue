@@ -4,7 +4,14 @@
       <v-textarea :label="field.name" counter no-resize :rows="field.rows" v-model="field.value"></v-textarea>
     </div>
 
-    <h2 id="export" draggable="true" @dragstart="inject">Export</h2>
+    <v-row>
+      <v-col>
+        <h2 id="export" draggable="true" @dragstart="inject">Export</h2>
+      </v-col>
+      <v-col>
+        <h2 id="import" @drop="dropJson" @dragenter.prevent @dragover.prevent>Import</h2>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -23,9 +30,9 @@ export default Vue.extend({
   data: function () {
     return {
       fields: [
-        { name: "title", rows: 3, value: "" },
-        { name: "tags", rows: 5, value: "" },
-        { name: "description", rows: 10, value: "" },
+        { name: "title", rows: 2, value: "" },
+        { name: "tags", rows: 4, value: "" },
+        { name: "description", rows: 5, value: "" },
       ],
     };
   },
@@ -43,7 +50,6 @@ export default Vue.extend({
     },
     inject: function (event: any) {
       event.preventDefault();
-
       if (!fs.existsSync(this.$dir)) {
         fs.mkdirSync(this.$dir);
       }
@@ -54,6 +60,22 @@ export default Vue.extend({
         alert("Failed to save the file !");
       }
       window.ipcRenderer.send("ondragstart", filePath);
+    },
+
+    dropJson: function (evt: { dataTransfer: { files: any } }) {
+      let file = evt.dataTransfer.files[0];
+      let content = JSON.parse(fs.readFileSync(file.path));
+
+      content.forEach((element: { name: string; value: string }) => {
+        this.fields.forEach((field) => {
+          if (field.name == element.name) {
+            console.log(field.name, element.value);
+            field.value = element.value;
+          }
+        });
+      });
+
+      console.log(content);
     },
   },
 });
