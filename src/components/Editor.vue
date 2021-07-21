@@ -48,34 +48,27 @@ export default Vue.extend({
         date.getUTCSeconds().toString()
       );
     },
-    inject: function (event: any) {
+    inject: async function (event: any) {
       event.preventDefault();
       if (!fs.existsSync(this.$dir)) {
         fs.mkdirSync(this.$dir);
       }
-      let filePath = `${this.$dir}\\${this.getCustomTime()}.json`;
-      try {
-        fs.writeFileSync(filePath, JSON.stringify(this.fields), "utf-8");
-      } catch (e) {
-        alert("Failed to save the file !");
-      }
-      window.ipcRenderer.send("ondragstart", filePath);
+      let filePath = `${this.$dir}\super.json`;
+      fs.writeFileSync(filePath, JSON.stringify(this.fields), "utf-8");
+      fs.writeFileSync(`${this.$dir}\\${this.getCustomTime()}.json`, JSON.stringify(this.fields));
+      await window.ipcRenderer.send("ondragstart", filePath);
+      console.log(filePath);
     },
-
     dropJson: function (evt: { dataTransfer: { files: any } }) {
       let file = evt.dataTransfer.files[0];
       let content = JSON.parse(fs.readFileSync(file.path));
-
       content.forEach((element: { name: string; value: string }) => {
         this.fields.forEach((field) => {
           if (field.name == element.name) {
-            console.log(field.name, element.value);
             field.value = element.value;
           }
         });
       });
-
-      console.log(content);
     },
   },
 });
