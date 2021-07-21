@@ -4,7 +4,7 @@
       <v-textarea :label="field.name" counter no-resize :rows="field.rows" v-model="field.value"></v-textarea>
     </div>
 
-    <h2 draggable="true" @dragstart="inject">Export</h2>
+    <h2 id="export" draggable="true" @dragstart="inject">Export</h2>
   </v-container>
 </template>
 
@@ -12,8 +12,10 @@
 // const fs = require("fs-extra");
 // const path = require("path");
 /* eslint-disable */
+
 declare const window: any;
 const { ipcRenderer } = require("electron");
+const fs = require("fs-extra");
 window.ipcRenderer = ipcRenderer;
 import Vue from "vue";
 export default Vue.extend({
@@ -28,11 +30,30 @@ export default Vue.extend({
     };
   },
   methods: {
+    getCustomTime() {
+      const date = new Date();
+      return (
+        date.getUTCFullYear().toString() +
+        (date.getUTCMonth() + 1).toString() +
+        date.getUTCDate().toString() +
+        date.getUTCHours().toString() +
+        date.getUTCMinutes().toString() +
+        date.getUTCSeconds().toString()
+      );
+    },
     inject: function (event: any) {
-      console.log("moving ", event.target);
-      console.log("event ", event);
       event.preventDefault();
-      window.ipcRenderer.send("ondragstart", event.target.id);
+
+      if (!fs.existsSync(this.$dir)) {
+        fs.mkdirSync(this.$dir);
+      }
+      let filePath = `${this.$dir}\\${this.getCustomTime()}.json`;
+      try {
+        fs.writeFileSync(filePath, JSON.stringify(this.fields), "utf-8");
+      } catch (e) {
+        alert("Failed to save the file !");
+      }
+      window.ipcRenderer.send("ondragstart", filePath);
     },
   },
 });
