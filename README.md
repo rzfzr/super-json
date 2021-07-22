@@ -1,4 +1,4 @@
-# **Super** user **-** friendly **JSON** editor
+# Super user-friendly JSON editor
 
 Made especially for working with contractors (in my case, freelancing video editors/ non-programmers), they should be able to create json files within the given model, without knowing what json is, having to mess brackets and commas, potencially making mistakes.
 
