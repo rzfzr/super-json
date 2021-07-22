@@ -4,7 +4,7 @@ import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
-
+const { Notification } = require('electron')
 const {
   ipcMain
 } = require('electron')
@@ -13,10 +13,12 @@ ipcMain.on('ondragstart', (event, filePath) => {
   try {
     event.sender.startDrag({
       file: filePath,
-      icon: require("path").join(__dirname, 'assets\\logo.png'),
+      icon: require("path").join(__dirname, isDevelopment ? 'assets\\logo.png' : '..\\..\\src\\assets\\logo.png'),
     })
   } catch (error) {
-    console.log(error)
+    new Notification({ title: 'Error', body: error.toString() }).show()
+    console.log(`Ops...${error}`)
+    console.table(error)
   }
 })
 

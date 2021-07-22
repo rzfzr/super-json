@@ -56,7 +56,7 @@ export default Vue.extend({
       let filePath = `${this.$dir}\super.json`;
       fs.writeFileSync(filePath, JSON.stringify(this.fields), "utf-8");
       fs.writeFileSync(`${this.$dir}\\${this.getCustomTime()}.json`, JSON.stringify(this.fields));
-      await window.ipcRenderer.send("ondragstart", filePath);
+      window.ipcRenderer.send("ondragstart", filePath);
       console.log(filePath);
     },
     dropJson: function (evt: { dataTransfer: { files: any } }) {
