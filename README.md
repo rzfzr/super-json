@@ -4,6 +4,9 @@ Made especially for working with contractors (in my case, freelancing video edit
 
 ![screencast](https://github.com/rzfzr/super-json/blob/main/media/demo.webp)
 
+
+- [ ] Load template from filesystem
+- [ ] Template selection on start
 - [X] Backup at every export
 - [ ] Backup at every import
 - [ ] Visual way to load backups

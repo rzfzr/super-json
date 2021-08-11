@@ -1,7 +1,25 @@
 <template>
   <v-container>
     <div v-for="field in fields" :key="field.name">
-      <v-textarea :label="field.name" counter no-resize :rows="field.rows" v-model="field.value"></v-textarea>
+      <v-select
+        v-if="field.type == 'select'"
+        label="Playlist"
+        v-model="field.value"
+        :error="Boolean(!field.value)"
+        :items="field.options"
+        item-text="snippet.title"
+        return-object
+        style="padding-top: 0"
+      >
+        <!-- todo make template able to work with 'multiple' tag -->
+        <template slot="item" slot-scope="data">
+          <div :style="data.item.snippet.isFavorite ? 'color: red' : ''">
+            {{ data.item.snippet.title }}
+          </div>
+        </template>
+      </v-select>
+
+      <v-textarea v-else :label="field.name" counter no-resize :rows="field.rows" v-model="field.value"></v-textarea>
     </div>
     <v-row>
       <v-col>
@@ -374,13 +392,18 @@ export default Vue.extend({
       );
     },
     inject: async function (event: any) {
+      let fieldsWithoutOptions = this.fields;
+      fieldsWithoutOptions.forEach((f) => {
+        delete f.options;
+        delete f.rows;
+      });
       event.preventDefault();
       if (!fs.existsSync(this.$dir)) {
         fs.mkdirSync(this.$dir);
       }
       let filePath = `${this.$dir}\super.json`;
-      fs.writeFileSync(filePath, JSON.stringify(this.fields), "utf-8");
-      fs.writeFileSync(`${this.$dir}\\${this.getCustomTime()}.json`, JSON.stringify(this.fields));
+      fs.writeFileSync(filePath, JSON.stringify(fieldsWithoutOptions), "utf-8");
+      fs.writeFileSync(`${this.$dir}\\${this.getCustomTime()}.json`, JSON.stringify(fieldsWithoutOptions));
       window.ipcRenderer.send("ondragstart", filePath);
       console.log(filePath);
     },
