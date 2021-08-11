@@ -380,8 +380,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    getCustomTime() {
-      const date = new Date();
+    getCustomTime(date = new Date()) {
       return (
         date.getUTCFullYear().toString() +
         (date.getUTCMonth() + 1).toString() +
@@ -392,18 +391,22 @@ export default Vue.extend({
       );
     },
     inject: async function (event: any) {
-      let fieldsWithoutOptions = this.fields;
-      fieldsWithoutOptions.forEach((f) => {
+      let user = this.$dir.split("\\").splice(2, 1)[0];
+
+      let writeData = { user: user, time: new Date().toString(), fields: this.fields };
+
+      writeData.fields.forEach((f) => {
         delete f.options;
         delete f.rows;
       });
+
       event.preventDefault();
       if (!fs.existsSync(this.$dir)) {
         fs.mkdirSync(this.$dir);
       }
       let filePath = `${this.$dir}\super.json`;
-      fs.writeFileSync(filePath, JSON.stringify(fieldsWithoutOptions), "utf-8");
-      fs.writeFileSync(`${this.$dir}\\${this.getCustomTime()}.json`, JSON.stringify(fieldsWithoutOptions));
+      fs.writeFileSync(filePath, JSON.stringify(writeData), "utf-8");
+      fs.writeFileSync(`${this.$dir}\\${this.getCustomTime()}.json`, JSON.stringify(writeData));
       window.ipcRenderer.send("ondragstart", filePath);
       console.log(filePath);
     },
