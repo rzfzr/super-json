@@ -8,15 +8,12 @@ import '@mdi/font/css/materialdesignicons.css'
 Vue.config.productionTip = false
 
 /* eslint @typescript-eslint/no-var-requires: "off" */
-
-
 declare module 'vue/types/vue' {
   interface Vue {
     $dir: string;
   }
 }
 Vue.prototype.$dir = require('path').join(require("os").homedir(), "Desktop") + "\\super-json\\"
-
 new Vue({
   store,
   vuetify,
