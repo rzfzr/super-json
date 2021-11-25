@@ -4,6 +4,7 @@
       <v-select
         v-if="field.type == 'select'"
         label="Playlist"
+        :multiple="field.multiple"
         v-model="field.value"
         :error="Boolean(!field.value)"
         :items="field.options"
@@ -11,11 +12,25 @@
         return-object
         style="padding-top: 0"
       >
-        <!-- todo make template able to work with 'multiple' tag -->
-        <template slot="item" slot-scope="data">
+        <!-- <template slot="item" slot-scope="data">
           <div :style="data.item.snippet.isFavorite ? 'color: red' : ''">
             {{ data.item.snippet.title }}
           </div>
+        </template> -->
+
+        <template v-slot:item="{ item, attrs, on }">
+          <v-list-item v-on="on" v-bind="attrs" #default="{ active }">
+            <v-list-item-action>
+              <v-checkbox :ripple="false" :input-value="active"></v-checkbox>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                <v-row no-gutters align="center">
+                  {{ item.snippet.title }}
+                </v-row>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </template>
       </v-select>
 
@@ -60,7 +75,8 @@ export default Vue.extend({
         {
           name: "playlist",
           type: "select",
-          value: {},
+          multiple: true,
+          value: [],
           options: [
             {
               etag: "kTH5xdxsjv6Hk-_qFjvM0OUl8vo",
