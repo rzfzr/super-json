@@ -16,7 +16,8 @@
 <script lang="ts">
 import Vue from "vue";
 import Editor from "./components/Editor.vue";
-import metadata from "./metadata.json";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const metadata = require("./metadata.json");
 
 export default Vue.extend({
   name: "App",
