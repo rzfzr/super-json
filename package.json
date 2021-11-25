@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "lint": "vue-cli-service lint",
-    "build": "vue-cli-service electron:build",
+    "build": "node updateBuildDate.js && vue-cli-service electron:build",
     "serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps",
-    "deploy": "node updateBuildDate.js"
+    "postuninstall": "electron-builder install-app-deps"
   },
   "main": "background.js",
   "dependencies": {
