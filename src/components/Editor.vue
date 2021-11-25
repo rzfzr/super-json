@@ -38,6 +38,7 @@
 declare const window: any;
 const { ipcRenderer } = require("electron");
 const fs = require("fs-extra");
+import path from "path";
 window.ipcRenderer = ipcRenderer;
 import Vue from "vue";
 export default Vue.extend({
@@ -401,9 +402,14 @@ export default Vue.extend({
       });
 
       event.preventDefault();
-      if (!fs.existsSync(this.$dir)) {
-        fs.mkdirSync(this.$dir);
-      }
+
+      [path.dirname(this.$dir), this.$dir].forEach((dir) => {
+        //create dirs if not existent
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir);
+        }
+      });
+
       let filePath = `${this.$dir}\super.json`;
       fs.writeFileSync(filePath, JSON.stringify(writeData), "utf-8");
       fs.writeFileSync(`${this.$dir}\\${this.getCustomTime()}.json`, JSON.stringify(writeData));

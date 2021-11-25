@@ -13,7 +13,7 @@ declare module 'vue/types/vue' {
     $dir: string;
   }
 }
-Vue.prototype.$dir = require('path').join(require("os").homedir(), "Desktop") + "\\super-json\\"
+Vue.prototype.$dir = require('path').join(require("os").homedir(), "Desktop") + "\\ClicNet\\super-json\\"
 new Vue({
   store,
   vuetify,
