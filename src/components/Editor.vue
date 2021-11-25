@@ -19,7 +19,15 @@
         </template>
       </v-select>
 
-      <v-textarea v-else :label="field.name" counter no-resize :rows="field.rows" v-model="field.value"></v-textarea>
+      <v-textarea
+        v-else
+        :label="field.name"
+        :counter="field.counter"
+        :maxlength="field.maxlength"
+        :rows="field.rows"
+        v-model="field.value"
+        no-resize
+      ></v-textarea>
     </div>
     <v-row>
       <v-col>
@@ -46,7 +54,7 @@ export default Vue.extend({
   data: function () {
     return {
       fields: [
-        { name: "title", rows: 2, value: "" },
+        { name: "title", rows: 2, value: "", maxlength: 100, counter: true },
         { name: "tags", rows: 4, value: "" },
         { name: "description", rows: 5, value: "" },
         {
