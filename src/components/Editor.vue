@@ -63,6 +63,21 @@ export default Vue.extend({
           value: {},
           options: [
             {
+              etag: "kTH5xdxsjv6Hk-_qFjvM0OUl8vo",
+              id: "PLfUALTmsML0W2tpi7l_mUjunZrKluYzxI",
+              snippet: { channelId: "UCc4Ngn8VDOuJtD5LGMN9Drw", title: "Shorts" },
+            },
+            {
+              etag: "xVUa-Bnl7Lq3FCT0SVbnhzvyynA",
+              id: "PLfUALTmsML0Ur-u8FCMZuPJm_kQXNKl4D",
+              snippet: { channelId: "UCc4Ngn8VDOuJtD5LGMN9Drw", title: "Ideias de decoração para Sala de Estar" },
+            },
+            {
+              etag: "gGHLwIef77nSfsMfOkmwqS_zoL0",
+              id: "PLfUALTmsML0W6hDEoxs8tk2AYSZyHJWAi",
+              snippet: { channelId: "UCc4Ngn8VDOuJtD5LGMN9Drw", title: "Dicas e truques" },
+            },
+            {
               etag: "a2mxDaA2AVKZRxJGwN0yjPj4Z3Q",
               id: "PLfUALTmsML0W6-qltZq79QFhf4H2jFwIJ",
               snippet: { channelId: "UCc4Ngn8VDOuJtD5LGMN9Drw", title: "Feng Shui" },
@@ -293,7 +308,7 @@ export default Vue.extend({
               snippet: { channelId: "UCc4Ngn8VDOuJtD5LGMN9Drw", title: "Animais de Estimação" },
             },
             {
-              etag: "PJBCReQhLadiBKM-NAbBOB6_3Ec",
+              etag: "UucL0aKnMJqPLMso00sTk8_3kJI",
               id: "PLfUALTmsML0UbhIA3KVuqeXNz_JBhixJT",
               snippet: { channelId: "UCc4Ngn8VDOuJtD5LGMN9Drw", title: "Ideias legais para o Natal / Christmas Ideas" },
             },
@@ -326,10 +341,9 @@ export default Vue.extend({
               snippet: { channelId: "UCc4Ngn8VDOuJtD5LGMN9Drw", title: "Ideias Legais com Quadros ou Molduras" },
             },
             {
-              etag: "ZmwuQi51Y7ZLT4ZDG0E8Zd0nYgw",
+              etag: "44oEPM5BJt9B_0d3OuUcDJhObJE",
               id: "PLfUALTmsML0W5Ug8318gnki2ldzGiX1EK",
               snippet: {
-                isFavorite: true,
                 channelId: "UCc4Ngn8VDOuJtD5LGMN9Drw",
                 title: "Ideias Legais de Decoração / Cool Decoration Ideas",
               },
@@ -338,7 +352,6 @@ export default Vue.extend({
               etag: "bAnVd2yG3VnR3lgK8VgVBspd9Jo",
               id: "PLfUALTmsML0XPO8Z5BkxYB1XhXQ72IMU6",
               snippet: {
-                isFavorite: true,
                 channelId: "UCc4Ngn8VDOuJtD5LGMN9Drw",
                 title: "Ideias Legais de Reciclagem / Recycling and Upcycling Cool Ideas",
               },
@@ -347,7 +360,6 @@ export default Vue.extend({
               etag: "sX5YIArh-S0zyd74xG_xWPd64YI",
               id: "PLfUALTmsML0UiumWhcX5RecK3Xn0bdk5U",
               snippet: {
-                isFavorite: true,
                 channelId: "UCc4Ngn8VDOuJtD5LGMN9Drw",
                 title: "Ideias Legais de Organização / Cool Organization Ideas",
               },
@@ -356,7 +368,6 @@ export default Vue.extend({
               etag: "t1B34iSP4Sw5BtLzG-UlyG2Ira0",
               id: "PLfUALTmsML0XioZ2Ps--RnwrA-pXcnzg4",
               snippet: {
-                isFavorite: true,
                 channelId: "UCc4Ngn8VDOuJtD5LGMN9Drw",
                 title: "Ideias Legais para Jardim / Cool Gardening Ideas // Ideas Geniales para Jardín",
               },
