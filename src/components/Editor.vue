@@ -428,13 +428,14 @@ export default Vue.extend({
     },
     inject: async function (event: any) {
       let user = this.$dir.split("\\").splice(2, 1)[0];
+      let time = new Date().toString();
+      let fields = [...this.fields];
+      // fields.forEach((f) => {
+      //   delete f.options;
+      //   delete f.rows;
+      // });
 
-      let writeData = { user: user, time: new Date().toString(), fields: this.fields };
-
-      writeData.fields.forEach((f) => {
-        delete f.options;
-        delete f.rows;
-      });
+      let writeData = { user, time, fields };
 
       event.preventDefault();
 
@@ -449,7 +450,7 @@ export default Vue.extend({
       fs.writeFileSync(filePath, JSON.stringify(writeData), "utf-8");
       fs.writeFileSync(`${this.$dir}\\${this.getCustomTime()}.json`, JSON.stringify(writeData));
       window.ipcRenderer.send("ondragstart", filePath);
-      console.log(filePath);
+      console.log(this.fields);
     },
     dropJson: function (evt: { dataTransfer: { files: any } }) {
       let file = evt.dataTransfer.files[0];
