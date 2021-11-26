@@ -5,6 +5,7 @@
   "scripts": {
     "lint": "vue-cli-service lint",
     "build": "node updateBuildDate.js && vue-cli-service electron:build",
+    "b": "node updateBuildDate.js && vue-cli-service electron:build && node copyExecutable.js",
     "serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
