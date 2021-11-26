@@ -46,10 +46,20 @@
     </div>
     <v-row>
       <v-col>
-        <h2 id="export" draggable="true" @dragstart="inject">Export</h2>
+        <h2 id="export" draggable="true" @dragstart="inject" style="border-style: dotted; text-align: center">
+          Export
+        </h2>
       </v-col>
       <v-col>
-        <h2 id="import" @drop="dropJson" @dragenter.prevent @dragover.prevent>Import</h2>
+        <h2
+          id="import"
+          @drop="dropJson"
+          @dragenter.prevent
+          @dragover.prevent
+          style="border-style: dotted; text-align: center"
+        >
+          Import
+        </h2>
       </v-col>
     </v-row>
   </v-container>
