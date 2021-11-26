@@ -454,7 +454,7 @@ export default Vue.extend({
     dropJson: function (evt: { dataTransfer: { files: any } }) {
       let file = evt.dataTransfer.files[0];
       let content = JSON.parse(fs.readFileSync(file.path));
-      content.forEach((element: { name: string; value: string }) => {
+      content.fields.forEach((element: { name: string; value: string }) => {
         this.fields.forEach((field) => {
           if (field.name == element.name) {
             field.value = element.value;
