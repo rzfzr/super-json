@@ -69,8 +69,8 @@
 /* eslint-disable */
 
 declare const window: any;
-const { ipcRenderer } = require("electron");
-const fs = require("fs-extra");
+import { ipcRenderer } from "electron";
+import fs from "fs-extra";
 import path from "path";
 window.ipcRenderer = ipcRenderer;
 import Vue from "vue";
