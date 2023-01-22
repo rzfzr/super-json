@@ -1,17 +1,9 @@
 <template>
   <v-container>
     <div v-for="field in fields" :key="field.name">
-      <v-select
-        v-if="field.type == 'select'"
-        label="Playlist"
-        :multiple="field.multiple"
-        v-model="field.value"
-        :error="Boolean(!field.value)"
-        :items="field.options"
-        item-text="snippet.title"
-        return-object
-        style="padding-top: 0"
-      >
+      <v-select v-if="field.type == 'select'" label="Playlist" :multiple="field.multiple" v-model="field.value"
+        :error="Boolean(!field.value)" :items="field.options" item-text="snippet.title" return-object
+        style="padding-top: 0">
         <!-- <template slot="item" slot-scope="data">
           <div :style="data.item.snippet.isFavorite ? 'color: red' : ''">
             {{ data.item.snippet.title }}
@@ -34,15 +26,8 @@
         </template>
       </v-select>
 
-      <v-textarea
-        v-else
-        :label="field.name"
-        :counter="field.counter"
-        :maxlength="field.maxlength"
-        :rows="field.rows"
-        v-model="field.value"
-        no-resize
-      ></v-textarea>
+      <v-textarea v-else :label="field.name" :counter="field.counter" :maxlength="field.maxlength" :rows="field.rows"
+        v-model="field.value" no-resize></v-textarea>
     </div>
     <v-row>
       <v-col>
@@ -51,13 +36,8 @@
         </h2>
       </v-col>
       <v-col>
-        <h2
-          id="import"
-          @drop="dropJson"
-          @dragenter.prevent
-          @dragover.prevent
-          style="border-style: dotted; text-align: center"
-        >
+        <h2 id="import" @drop="dropJson" @dragenter.prevent @dragover.prevent
+          style="border-style: dotted; text-align: center">
           Import
         </h2>
       </v-col>
@@ -463,7 +443,7 @@ export default Vue.extend({
     },
     dropJson: function (evt: { dataTransfer: { files: any } }) {
       let file = evt.dataTransfer.files[0];
-      let content = JSON.parse(fs.readFileSync(file.path));
+      let content = fs.readJSONSync(file.path);
       content.fields.forEach((element: { name: string; value: string }) => {
         this.fields.forEach((field) => {
           if (field.name == element.name) {
